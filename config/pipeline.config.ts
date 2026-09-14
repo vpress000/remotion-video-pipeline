@@ -1,4 +1,5 @@
 import path from "node:path";
+import { FORMATS, FPS, type FormatSize } from "../src/formats";
 
 /**
  * Central configuration for asset locations and render dimensions.
@@ -11,8 +12,8 @@ export interface PipelineConfig {
   audioDir: string;
   fps: number;
   formats: {
-    vertical: { width: number; height: number };
-    landscape: { width: number; height: number };
+    vertical: FormatSize;
+    landscape: FormatSize;
   };
 }
 
@@ -24,9 +25,6 @@ export const pipelineConfig: PipelineConfig = {
     process.env.BN_FOOTAGE_DIR ??
     "C:\\Users\\patel\\Downloads\\BeeNaturals\\Video Work\\Videos to Cut",
   audioDir: process.env.BN_AUDIO_DIR ?? path.join("public", "audio"),
-  fps: 30,
-  formats: {
-    vertical: { width: 1080, height: 1920 },
-    landscape: { width: 1920, height: 1080 },
-  },
+  fps: FPS,
+  formats: FORMATS,
 };

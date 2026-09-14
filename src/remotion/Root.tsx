@@ -6,7 +6,7 @@ import {
   type VideoSpec,
 } from "../schema/video-spec";
 import { ProductVideo } from "./compositions/ProductVideo";
-import { pipelineConfig } from "../../config/pipeline.config";
+import { FORMATS } from "../formats";
 import sampleSpec from "../../data/specs/sample.video-spec.json";
 
 // The committed sample lets the renderer run with zero API keys and no assets.
@@ -18,7 +18,7 @@ const calculateMetadata = ({ props }: { props: VideoSpec }) => ({
 });
 
 export const RemotionRoot: React.FC = () => {
-  const { vertical, landscape } = pipelineConfig.formats;
+  const { vertical, landscape } = FORMATS;
 
   return (
     <>
