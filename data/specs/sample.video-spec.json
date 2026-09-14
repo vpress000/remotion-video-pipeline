@@ -1,0 +1,82 @@
+{
+  "title": "Bee Naturals — Vitamin C Facial Nectar",
+  "brand": {
+    "name": "Bee Naturals",
+    "primary": "#F4B400",
+    "secondary": "#2E7D32",
+    "background": "#0E1B12",
+    "text": "#FFFFFF",
+    "fontFamily": "Montserrat",
+    "logoSrc": null
+  },
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-1",
+      "type": "intro",
+      "durationInSeconds": 3,
+      "headline": "Glow, Naturally",
+      "subtext": "Meet the Vitamin C Facial Nectar.",
+      "bullets": [],
+      "footageSrc": null,
+      "transition": "fade"
+    },
+    {
+      "id": "scene-2",
+      "type": "product",
+      "durationInSeconds": 4,
+      "headline": "Botanical Brightening",
+      "subtext": "Stabilized vitamin C in a lightweight, fast-absorbing nectar.",
+      "bullets": [],
+      "footageSrc": null,
+      "transition": "slide"
+    },
+    {
+      "id": "scene-3",
+      "type": "feature",
+      "durationInSeconds": 5,
+      "headline": "Why You'll Love It",
+      "subtext": "Powered by nature, backed by science.",
+      "bullets": ["Brightens dull skin", "Hydrates and smooths", "Clean and cruelty-free"],
+      "footageSrc": null,
+      "transition": "fade"
+    },
+    {
+      "id": "scene-4",
+      "type": "feature",
+      "durationInSeconds": 4,
+      "headline": "Key Ingredients",
+      "subtext": "Ferulic acid, niacinamide, and hyaluronic acid.",
+      "bullets": [],
+      "footageSrc": null,
+      "transition": "zoom"
+    },
+    {
+      "id": "scene-5",
+      "type": "cta",
+      "durationInSeconds": 3,
+      "headline": "Shop Now",
+      "subtext": "beenaturals.com",
+      "bullets": [],
+      "footageSrc": null,
+      "transition": "fade"
+    }
+  ],
+  "captions": {
+    "enabled": true,
+    "vttSrc": null,
+    "cues": [
+      { "startMs": 0, "endMs": 3000, "text": "Meet the Vitamin C Facial Nectar." },
+      { "startMs": 3000, "endMs": 7000, "text": "Stabilized vitamin C in a lightweight nectar." },
+      { "startMs": 7000, "endMs": 12000, "text": "Powered by nature, backed by science." },
+      { "startMs": 12000, "endMs": 16000, "text": "Ferulic acid, niacinamide, and hyaluronic acid." },
+      { "startMs": 16000, "endMs": 19000, "text": "Shop now at beenaturals.com." }
+    ]
+  },
+  "music": {
+    "mood": "calm, uplifting",
+    "trackSrc": null,
+    "volume": 0.2
+  },
+  "callToAction": "Shop now at beenaturals.com"
+}

@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+
+# Build & render output
+out/
+dist/
+.remotion/
+
+# Env & secrets
+.env
+.env.local
+.env.*.local
+
+# Rendered / heavy media — never commit copyrighted audio or large video
+*.mp4
+*.mov
+*.webm
+*.mp3
+*.wav
+*.aac
+*.m4a
+
+# Logs & OS
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
+
+# Keep sample caption files even though media is ignored
+!assets/captions/*.vtt

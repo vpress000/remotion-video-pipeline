@@ -1,0 +1,49 @@
+{
+  "name": "remotion-video-pipeline",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Bee Naturals programmatic video pipeline: an LLM planning layer (7 agents) that produces a validated VideoSpec, rendered to 9:16 and 16:9 videos with Remotion.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "studio": "remotion studio src/remotion/index.ts",
+    "render:vertical": "remotion render src/remotion/index.ts ProductVideoVertical out/vertical.mp4",
+    "render:landscape": "remotion render src/remotion/index.ts ProductVideoLandscape out/landscape.mp4",
+    "render": "npm run render:vertical && npm run render:landscape",
+    "still": "remotion still src/remotion/index.ts ProductVideoVertical out/still.png --frame=45",
+    "plan": "tsx src/pipeline/run.ts",
+    "prep:captions": "tsx src/pipeline/inline-captions.ts",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.30.1",
+    "@remotion/google-fonts": "^4.0.0",
+    "@remotion/zod-types": "^4.0.0",
+    "commander": "^12.1.0",
+    "dotenv": "^16.4.5",
+    "openai": "^4.67.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "remotion": "^4.0.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@remotion/cli": "^4.0.0",
+    "@types/node": "^22.7.4",
+    "@types/react": "^18.3.11",
+    "@types/react-dom": "^18.3.0",
+    "eslint": "^9.12.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "prettier": "^3.3.3",
+    "tsx": "^4.19.1",
+    "typescript": "^5.6.2",
+    "typescript-eslint": "^8.8.0",
+    "vitest": "^2.1.2"
+  }
+}
