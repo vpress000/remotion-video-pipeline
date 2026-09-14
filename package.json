@@ -12,6 +12,7 @@
     "render:vertical": "remotion render src/remotion/index.ts ProductVideoVertical out/vertical.mp4",
     "render:landscape": "remotion render src/remotion/index.ts ProductVideoLandscape out/landscape.mp4",
     "render": "npm run render:vertical && npm run render:landscape",
+    "preview": "remotion render src/remotion/index.ts ProductVideoVertical out/preview.mp4 --scale=0.5",
     "still": "remotion still src/remotion/index.ts ProductVideoVertical out/still.png --frame=45",
     "plan": "tsx src/pipeline/run.ts",
     "prep:captions": "tsx src/pipeline/inline-captions.ts",

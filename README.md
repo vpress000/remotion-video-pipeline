@@ -142,14 +142,23 @@ npm run studio
 npm run render            # both orientations -> out/vertical.mp4, out/landscape.mp4
 npm run render:vertical   # just 9:16
 npm run render:landscape  # just 16:9
+npm run preview           # fast half-scale 9:16 preview -> out/preview.mp4
 npm run still             # single validation frame -> out/still.png
 ```
+
+**Render a custom spec** (e.g. one produced by `npm run plan`) — pass it with Remotion's `--props`:
+```powershell
+npm run render:vertical -- --props=data/specs/generated.video-spec.json
+npm run render:landscape -- --props=data/specs/generated.video-spec.json
+```
+Remotion loads the JSON as input props and validates it against the schema.
 
 **Generate a fresh spec from a brief (needs an API key):**
 ```powershell
 # 1) put a key in .env, then:
 npm run plan -- --brief data/briefs/sample-product.json --out data/specs/generated.video-spec.json
-# 2) render it (point the sample import or pass props); see ARCHITECTURE.md "Rendering a custom spec"
+# 2) render it with --props:
+npm run render:vertical -- --props=data/specs/generated.video-spec.json
 ```
 
 **Inline external captions into a spec:**
@@ -217,12 +226,17 @@ timed `captions.cues[]`, `brand` theme, and a `music` plan — rendered to
 | Captions don't show | Ensure the spec has `captions.enabled: true` and non-empty `cues` (run `npm run prep:captions`). |
 | Colors rejected by Zod | `brand.*` colors must be valid CSS colors (hex like `#0E1B12`). |
 
+## Continuous integration
+
+- **`ci.yml`** — typecheck, lint, and unit tests on every push/PR.
+- **`preview.yml`** — renders a half-scale 9:16 preview MP4 on every push and uploads it as a downloadable **build artifact** (`preview-vertical-mp4`), available from the workflow run's *Artifacts* section.
+
 ## Roadmap
 
-- Pass a chosen spec file to the renderer via `--props` instead of the sample import.
 - Optional LLM caption rewriting in `SubtitleCaptionAgent`.
 - `@remotion/transitions` for richer scene transitions.
 - Batch mode: many briefs → many renders via a queue.
+- Cache the Remotion browser in CI to speed up preview renders.
 
 ## License
 

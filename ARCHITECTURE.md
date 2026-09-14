@@ -145,5 +145,24 @@ Deterministic units are covered by Vitest (no API key required):
 - `tests/video-spec.test.ts` — schema defaults, sample-spec validity, duration math.
 - `tests/assembler.test.ts` — caption timing + duration normalization in `assembleVideoSpec`.
 
-CI ([.github/workflows/ci.yml](.github/workflows/ci.yml)) runs typecheck + lint + tests
-on Node 20. Rendering is intentionally excluded from CI (it needs a browser download).
+CI runs on Node 20:
+- [.github/workflows/ci.yml](.github/workflows/ci.yml) — typecheck + lint + tests (fast; no browser).
+- [.github/workflows/preview.yml](.github/workflows/preview.yml) — renders a half-scale 9:16 preview MP4 on every push and uploads it as an artifact (see §10).
+
+## 10. Rendering a custom spec & CI preview
+
+**Custom spec (local):** the renderer reads a `VideoSpec` from Remotion's `--props`, so any
+spec (e.g. from `npm run plan`) can be rendered without code changes:
+
+```bash
+npm run render:vertical -- --props=data/specs/generated.video-spec.json
+```
+
+Remotion merges `--props` over the composition's `defaultProps` and validates the result with
+`videoSpecSchema`; `calculateMetadata` then recomputes the duration from the supplied scenes.
+
+**CI preview:** [preview.yml](.github/workflows/preview.yml) runs on every push. On `ubuntu-22.04`
+it installs Chromium's system libraries, runs `npx remotion browser ensure`, renders
+`npm run preview` (9:16 at half scale → `out/preview.mp4`), and uploads it as the
+`preview-vertical-mp4` artifact. Rendering is kept in a separate workflow from `ci.yml` so the
+fast checks aren't blocked by the slower render.

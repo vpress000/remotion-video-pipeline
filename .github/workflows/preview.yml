@@ -1,0 +1,49 @@
+name: Preview render
+
+# Renders a lightweight 9:16 preview MP4 on every push and publishes it as a
+# downloadable build artifact. Kept separate from ci.yml so the fast checks
+# (typecheck/lint/test) are never blocked by the slower video render.
+
+on:
+  push:
+  workflow_dispatch:
+
+concurrency:
+  group: preview-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  preview:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Chromium system libraries
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libnss3 libdbus-1-3 libatk1.0-0 libgbm-dev libasound2 \
+            libxrandr2 libxkbcommon-dev libxfixes3 libxcomposite1 \
+            libxdamage1 libatk-bridge2.0-0 libpango-1.0-0 libcairo2 libcups2
+
+      - name: Ensure Remotion browser
+        run: npx remotion browser ensure
+
+      - name: Render 9:16 preview (half scale)
+        run: npm run preview
+
+      - name: Upload preview MP4
+        uses: actions/upload-artifact@v4
+        with:
+          name: preview-vertical-mp4
+          path: out/preview.mp4
+          if-no-files-found: error
+          retention-days: 14
