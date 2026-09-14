@@ -161,8 +161,11 @@ npm run render:vertical -- --props=data/specs/generated.video-spec.json
 Remotion merges `--props` over the composition's `defaultProps` and validates the result with
 `videoSpecSchema`; `calculateMetadata` then recomputes the duration from the supplied scenes.
 
-**CI preview:** [preview.yml](.github/workflows/preview.yml) runs on every push. On `ubuntu-22.04`
-it installs Chromium's system libraries, runs `npx remotion browser ensure`, renders
-`npm run preview` (9:16 at half scale → `out/preview.mp4`), and uploads it as the
-`preview-vertical-mp4` artifact. Rendering is kept in a separate workflow from `ci.yml` so the
-fast checks aren't blocked by the slower render.
+**CI preview:** [preview.yml](.github/workflows/preview.yml) runs on every push and can be
+triggered manually via **Run workflow**. On `ubuntu-22.04` it installs Chromium's system
+libraries, restores a cached Remotion browser (`node_modules/.remotion`, keyed on the lockfile),
+runs `npx remotion browser ensure`, renders the chosen orientation(s) at the chosen scale, and
+uploads the result as the `preview-mp4` artifact. Manual inputs: **orientation**
+(vertical/landscape/both), **spec** (a `--props` JSON path; blank = sample), and **scale**
+(`0.5` or `1`). Inputs are passed via environment variables (not string-interpolated into the
+shell) to avoid script injection. Rendering is kept in a separate workflow from `ci.yml`.

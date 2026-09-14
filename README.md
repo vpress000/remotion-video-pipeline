@@ -229,7 +229,10 @@ timed `captions.cues[]`, `brand` theme, and a `music` plan — rendered to
 ## Continuous integration
 
 - **`ci.yml`** — typecheck, lint, and unit tests on every push/PR.
-- **`preview.yml`** — renders a half-scale 9:16 preview MP4 on every push and uploads it as a downloadable **build artifact** (`preview-vertical-mp4`), available from the workflow run's *Artifacts* section.
+- **`preview.yml`** — renders a preview MP4 and uploads it as the **`preview-mp4`** artifact (from the run's *Artifacts* section).
+  - **On every push:** a half-scale 9:16 preview (defaults).
+  - **On demand** (*Actions → Preview render → Run workflow*): pick **orientation** (vertical / landscape / both), a **spec** path for `--props` (e.g. `data/specs/generated.video-spec.json`; blank = sample), and **scale** (`0.5` or `1`).
+  - The Remotion browser is cached between runs for faster renders.
 
 ## Roadmap
 

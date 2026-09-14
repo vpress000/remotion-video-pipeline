@@ -1,12 +1,33 @@
 name: Preview render
 
-# Renders a lightweight 9:16 preview MP4 on every push and publishes it as a
-# downloadable build artifact. Kept separate from ci.yml so the fast checks
-# (typecheck/lint/test) are never blocked by the slower video render.
+# Renders a preview MP4 and publishes it as a downloadable build artifact.
+#   - On every push: a half-scale 9:16 preview (defaults below).
+#   - On demand (Run workflow): choose orientation, spec (--props), and scale.
+# Kept separate from ci.yml so the fast checks are never blocked by rendering.
 
 on:
   push:
   workflow_dispatch:
+    inputs:
+      orientation:
+        description: "Orientation(s) to render"
+        type: choice
+        options:
+          - vertical
+          - landscape
+          - both
+        default: vertical
+      spec:
+        description: "VideoSpec JSON path for --props (blank = built-in sample)"
+        type: string
+        default: ""
+      scale:
+        description: "Render scale (0.5 = fast preview, 1 = full resolution)"
+        type: choice
+        options:
+          - "0.5"
+          - "1"
+        default: "0.5"
 
 concurrency:
   group: preview-${{ github.ref }}
@@ -26,6 +47,13 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # Restore AFTER npm ci (which wipes node_modules) so the cached browser survives.
+      - name: Cache Remotion browser
+        uses: actions/cache@v4
+        with:
+          path: node_modules/.remotion
+          key: remotion-browser-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+
       - name: Install Chromium system libraries
         run: |
           sudo apt-get update
@@ -34,16 +62,35 @@ jobs:
             libxrandr2 libxkbcommon-dev libxfixes3 libxcomposite1 \
             libxdamage1 libatk-bridge2.0-0 libpango-1.0-0 libcairo2 libcups2
 
-      - name: Ensure Remotion browser
+      - name: Ensure Remotion browser (uses cache when present)
         run: npx remotion browser ensure
 
-      - name: Render 9:16 preview (half scale)
-        run: npm run preview
+      - name: Render preview(s)
+        env:
+          ORIENTATION: ${{ github.event.inputs.orientation || 'vertical' }}
+          SPEC: ${{ github.event.inputs.spec }}
+          SCALE: ${{ github.event.inputs.scale || '0.5' }}
+        run: |
+          set -euo pipefail
+          mkdir -p out
+          ARGS=(--scale="$SCALE")
+          if [ -n "${SPEC:-}" ]; then ARGS+=(--props="$SPEC"); fi
+          render() {
+            echo "Rendering $1 -> out/$2.mp4 (scale=$SCALE, spec=${SPEC:-sample})"
+            npx remotion render src/remotion/index.ts "$1" "out/$2.mp4" "${ARGS[@]}"
+          }
+          case "$ORIENTATION" in
+            vertical)  render ProductVideoVertical  preview-vertical ;;
+            landscape) render ProductVideoLandscape preview-landscape ;;
+            both)      render ProductVideoVertical  preview-vertical
+                       render ProductVideoLandscape preview-landscape ;;
+            *) echo "Unknown orientation: $ORIENTATION" >&2; exit 1 ;;
+          esac
 
-      - name: Upload preview MP4
+      - name: Upload preview MP4(s)
         uses: actions/upload-artifact@v4
         with:
-          name: preview-vertical-mp4
-          path: out/preview.mp4
+          name: preview-mp4
+          path: out/*.mp4
           if-no-files-found: error
           retention-days: 14
