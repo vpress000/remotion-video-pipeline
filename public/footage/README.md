@@ -7,5 +7,4 @@ Drop product **b-roll clips** here (`.mp4` / `.mov` / `.webm`).
 - When a scene has no `footageSrc`, an on-brand animated gradient is shown instead, so the video always renders.
 - Video files are **git-ignored** to keep the repo small.
 
-To pull footage from your existing Bee Naturals library, copy clips from
-`C:\Users\patel\Downloads\BeeNaturals\Video Work\Videos to Cut` into this folder.
+To use your own footage, copy clips into this folder and reference them by filename.

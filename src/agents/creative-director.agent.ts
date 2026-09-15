@@ -3,12 +3,12 @@ import { generateJSON } from "./llm/client";
 import type { Brief } from "../schema/video-spec";
 import { creativeDirectionSchema, type CreativeDirection, type Script } from "./contracts";
 
-const SYSTEM = `You are CreativeDirectorAgent for Bee Naturals, a clean-beauty brand (natural, botanical, premium, calm).
+const SYSTEM = `You are CreativeDirectorAgent for consumer product videos.
 Given a script, define the visual language: color palette, typography, mood, pacing, and a per-beat visual idea + transition.
 Color rules:
 - Return palette values as hex strings (e.g. "#0E1B12").
 - Ensure text contrasts strongly against background (WCAG-ish).
-- Favor earthy greens, warm honey golds, and clean off-whites unless the brief suggests otherwise.
+- Choose a palette that fits the brand tone and product described in the brief.
 sceneVisuals must include one entry per script beat, indexed from 0.
 transition is one of: none, fade, slide, zoom.
 Return ONLY the JSON object described by the schema.`;

@@ -10,11 +10,11 @@ const brief = briefSchema.parse({ productName: "Test Serum", targetDurationSecon
 const script: Script = {
   title: "Test",
   hook: "hook",
-  callToAction: "Shop now at beenaturals.com",
+  callToAction: "Shop now at yourbrand.com",
   beats: [
     { sceneType: "intro", narration: "Meet the test serum for glowing skin.", onScreenText: "Glow" },
     { sceneType: "feature", narration: "Packed with vitamin C and hyaluronic acid.", onScreenText: "Powerful" },
-    { sceneType: "cta", narration: "Shop now at beenaturals.com.", onScreenText: "Shop Now" },
+    { sceneType: "cta", narration: "Shop now at yourbrand.com.", onScreenText: "Shop Now" },
   ],
 };
 

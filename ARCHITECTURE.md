@@ -105,8 +105,8 @@ they can be swapped for LLM implementations later without touching the orchestra
 ## 5. Data flow & lineage
 
 `Brief → Script → {CreativeDirection, MusicPlan, EditPlan} → CaptionCue[] → VideoSpec → MP4`.
-Captions can alternatively originate from an external `.vtt` (the Bee Naturals subtitle
-pipeline) via `npm run prep:captions`, which parses the file with
+Captions can alternatively originate from an external `.vtt` (from any subtitle or
+transcription tool) via `npm run prep:captions`, which parses the file with
 [src/captions/vtt.ts](src/captions/vtt.ts) and inlines cues into the spec.
 
 ## 6. Dependencies

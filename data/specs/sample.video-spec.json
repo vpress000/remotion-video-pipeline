@@ -1,7 +1,7 @@
 {
-  "title": "Bee Naturals — Vitamin C Facial Nectar",
+  "title": "Your Brand — Vitamin C Facial Nectar",
   "brand": {
-    "name": "Bee Naturals",
+    "name": "Your Brand",
     "primary": "#F4B400",
     "secondary": "#2E7D32",
     "background": "#0E1B12",
@@ -56,7 +56,7 @@
       "type": "cta",
       "durationInSeconds": 3,
       "headline": "Shop Now",
-      "subtext": "beenaturals.com",
+      "subtext": "yourbrand.com",
       "bullets": [],
       "footageSrc": null,
       "transition": "fade"
@@ -70,7 +70,7 @@
       { "startMs": 3000, "endMs": 7000, "text": "Stabilized vitamin C in a lightweight nectar." },
       { "startMs": 7000, "endMs": 12000, "text": "Powered by nature, backed by science." },
       { "startMs": 12000, "endMs": 16000, "text": "Ferulic acid, niacinamide, and hyaluronic acid." },
-      { "startMs": 16000, "endMs": 19000, "text": "Shop now at beenaturals.com." }
+      { "startMs": 16000, "endMs": 19000, "text": "Shop now at yourbrand.com." }
     ]
   },
   "music": {
@@ -78,5 +78,5 @@
     "trackSrc": null,
     "volume": 0.2
   },
-  "callToAction": "Shop now at beenaturals.com"
+  "callToAction": "Shop now at yourbrand.com"
 }

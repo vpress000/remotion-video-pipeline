@@ -3,7 +3,7 @@ import { generateJSON } from "./llm/client";
 import type { Brief, VideoSpec } from "../schema/video-spec";
 import { reviewSchema, type Review } from "./contracts";
 
-const SYSTEM = `You are QualityReviewAgent, the final gate before a Bee Naturals video is rendered.
+const SYSTEM = `You are QualityReviewAgent, the final gate before a product video is rendered.
 Review the assembled VideoSpec against the brief and brand rules.
 Check: on-brand tone, no medical/drug claims, clear CTA, sensible pacing/durations,
 readable captions, and that key benefits/ingredients from the brief are represented.

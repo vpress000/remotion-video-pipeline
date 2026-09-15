@@ -58,7 +58,7 @@ export const musicSchema = z.object({
 export type Music = z.infer<typeof musicSchema>;
 
 export const brandThemeSchema = z.object({
-  name: z.string().default("Bee Naturals"),
+  name: z.string().default("Your Brand"),
   primary: zColor().default("#F4B400"),
   secondary: zColor().default("#2E7D32"),
   background: zColor().default("#0E1B12"),
@@ -76,7 +76,7 @@ export const videoSpecSchema = z.object({
   scenes: z.array(sceneSchema).min(1),
   captions: captionsSchema.default({}),
   music: musicSchema.default({}),
-  callToAction: z.string().default("Shop now at beenaturals.com"),
+  callToAction: z.string().default("Shop now"),
 });
 export type VideoSpec = z.infer<typeof videoSpecSchema>;
 
@@ -89,13 +89,13 @@ export const specDurationInFrames = (spec: VideoSpec): number => {
 /** Input brief consumed by the planning pipeline. */
 export const briefSchema = z.object({
   productName: z.string(),
-  brandName: z.string().default("Bee Naturals"),
+  brandName: z.string().default("Your Brand"),
   tagline: z.string().optional(),
   keyIngredients: z.array(z.string()).default([]),
   benefits: z.array(z.string()).default([]),
   targetAudience: z.string().default("skincare-conscious adults"),
   tone: z.string().default("warm, natural, premium"),
-  callToAction: z.string().default("Shop now at beenaturals.com"),
+  callToAction: z.string().default("Shop now"),
   targetDurationSeconds: z.number().positive().max(120).default(30),
 });
 export type Brief = z.infer<typeof briefSchema>;

@@ -10,7 +10,7 @@ describe("videoSpecSchema", () => {
   it("parses the committed sample spec", () => {
     const spec = videoSpecSchema.parse(sample);
     expect(spec.scenes.length).toBeGreaterThan(0);
-    expect(spec.title).toContain("Bee Naturals");
+    expect(spec.title).toContain("Your Brand");
   });
 
   it("applies defaults for optional fields", () => {
@@ -19,7 +19,7 @@ describe("videoSpecSchema", () => {
       scenes: [{ id: "s1", type: "intro", durationInSeconds: 2, headline: "Hello" }],
     });
     expect(spec.fps).toBe(30);
-    expect(spec.brand.name).toBe("Bee Naturals");
+    expect(spec.brand.name).toBe("Your Brand");
     expect(spec.scenes[0].transition).toBe("fade");
     expect(spec.scenes[0].bullets).toEqual([]);
     expect(spec.music.trackSrc).toBeNull();
@@ -34,7 +34,7 @@ describe("videoSpecSchema", () => {
 describe("briefSchema", () => {
   it("defaults brand name and target duration", () => {
     const brief = briefSchema.parse({ productName: "Facial Nectar" });
-    expect(brief.brandName).toBe("Bee Naturals");
+    expect(brief.brandName).toBe("Your Brand");
     expect(brief.targetDurationSeconds).toBe(30);
   });
 });

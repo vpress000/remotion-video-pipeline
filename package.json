@@ -2,7 +2,7 @@
   "name": "remotion-video-pipeline",
   "version": "0.1.0",
   "private": true,
-  "description": "Bee Naturals programmatic video pipeline: an LLM planning layer (7 agents) that produces a validated VideoSpec, rendered to 9:16 and 16:9 videos with Remotion.",
+  "description": "AI-driven programmatic video pipeline: an LLM planning layer (7 agents) that produces a validated VideoSpec, rendered to 9:16 and 16:9 videos with Remotion.",
   "type": "module",
   "engines": {
     "node": ">=20"

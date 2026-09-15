@@ -5,7 +5,7 @@
 ![Node](https://img.shields.io/badge/Node-%E2%89%A520-339933)
 ![License](https://img.shields.io/badge/license-Proprietary-lightgrey)
 
-An AI-driven programmatic-video pipeline for **Bee Naturals**. A 7-agent planning
+An AI-driven programmatic-video pipeline for **product marketing videos**. A 7-agent planning
 layer (LLM) turns a short **product brief** into a validated **VideoSpec**, which
 [Remotion](https://www.remotion.dev/) renders to social-ready MP4s in **both 9:16
 (reels) and 16:9 (landscape)** — with animated scenes, timed captions, and a
@@ -28,7 +28,7 @@ background-music slot.
 - [Environment variables](#environment-variables)
 - [Usage](#usage)
 - [Project structure](#project-structure)
-- [Using your real Bee Naturals assets](#using-your-real-bee-naturals-assets)
+- [Using your own assets](#using-your-own-assets)
 - [Example input / output](#example-input--output)
 - [Troubleshooting](#troubleshooting)
 - [Roadmap](#roadmap)
@@ -39,7 +39,7 @@ background-music slot.
 - **Render with zero setup.** A committed sample `VideoSpec` renders immediately — **no API key, no media assets required**.
 - **Full LLM integration, provider-agnostic.** Anthropic **or** OpenAI, selected by env. Every agent output is coerced to JSON and **validated with Zod**, with an automatic repair-retry.
 - **Both orientations from one codebase.** `ProductVideoVertical` (1080×1920) and `ProductVideoLandscape` (1920×1080) share the same responsive scenes.
-- **Timed captions** parsed from your existing `.vtt` files (the output of the Bee Naturals subtitle scripts) or generated from the script.
+- **Timed captions** parsed from your existing `.vtt` files (from any subtitle or transcription tool) or generated from the script.
 - **Royalty-free music slot** — drop a licensed track in `public/audio`; nothing copyrighted is ever committed.
 - **Typed, tested, CI-ready** — strict TypeScript, Vitest unit tests, ESLint, and a GitHub Actions workflow.
 
@@ -126,9 +126,9 @@ required for `npm run plan`.
 | `ANTHROPIC_MODEL` | Anthropic model | `claude-3-5-sonnet-latest` |
 | `OPENAI_API_KEY` | Key for OpenAI | — |
 | `OPENAI_MODEL` | OpenAI model | `gpt-4o` |
-| `BN_CAPTIONS_DIR` | Folder of your `.vtt` files | Bee Naturals VTT path |
-| `BN_FOOTAGE_DIR` | Folder of product clips | Bee Naturals footage path |
-| `BN_AUDIO_DIR` | Music folder | `public/audio` |
+| `CAPTIONS_DIR` | Folder of your `.vtt` files | `assets/captions` |
+| `FOOTAGE_DIR` | Folder of product clips | `public/footage` |
+| `AUDIO_DIR` | Music folder | `public/audio` |
 
 ## Usage
 
@@ -193,9 +193,9 @@ remotion-video-pipeline/
 └── tests/                           # Vitest unit tests
 ```
 
-## Using your real Bee Naturals assets
+## Using your own assets
 
-1. **Captions:** point `BN_CAPTIONS_DIR` at `…\Video Work\Subtitles\VTT Files`, set a spec's `captions.vttSrc` to a `.vtt` filename, and run `npm run prep:captions`.
+1. **Captions:** point `CAPTIONS_DIR` at your folder of `.vtt` files, set a spec's `captions.vttSrc` to a `.vtt` filename, and run `npm run prep:captions`.
 2. **Footage:** copy clips into `public/footage`, then set a scene's `footageSrc` to the filename.
 3. **Music:** drop a licensed track into `public/audio` and set `music.trackSrc` + `music.volume`.
 4. **Logo:** drop `logo.png` into `public/brand` and set `brand.logoSrc`.
@@ -243,4 +243,4 @@ timed `captions.cues[]`, `brand` theme, and a `music` plan — rendered to
 
 ## License
 
-Proprietary — © Bee Naturals. Private repository; not licensed for redistribution.
+Proprietary. Private repository; not licensed for redistribution.
